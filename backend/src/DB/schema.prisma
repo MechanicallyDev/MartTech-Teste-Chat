@@ -9,3 +9,11 @@ datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  password String
+  isVerified Boolean @default(false)
+}
