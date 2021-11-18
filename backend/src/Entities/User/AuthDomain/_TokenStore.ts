@@ -6,7 +6,7 @@ export default {
   },
 
   set(key: string, value: string, ttl: number) {
-    return redis.set(key, value, 'EX', ttl)
+    return redis.set(key, value, "EX", ttl)
   },
 
   async del(key: string) {
