@@ -1,13 +1,13 @@
 import express from 'express'
 import controller from './User.Controller'
 
-const app = express.Router()
+const routes = express.Router()
 
-app.get('/get/:id', controller.getUser)
-app.post('/register', controller.register)
-app.post('/login', controller.login)
-app.get('/verify/:token', controller.verify)
-app.post('/token', controller.renewTokens)
-app.delete('/logout', controller.logout)
+routes.get('/get/:id', controller.getUser)
+routes.post('/register', controller.register)
+routes.post('/login', controller.login)
+routes.get('/verify/:token', controller.verify)
+routes.post('/token', controller.renewTokens)
+routes.delete('/logout', controller.logout)
 
-export default app
+export default routes
