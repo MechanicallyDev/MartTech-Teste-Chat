@@ -19,9 +19,14 @@ export default {
 
   async generate(user: User) {
     const verificationToken = await Token.sign(
-      user,
+      {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        isVerified: user.isVerified,
+      },
       process.env.VERIFICATION_TOKEN_SECRET as string,
-      process.env.VERIFICATION_TOKEN_EXPIRATION
+      process.env.VERIFICATION_TOKEN_EXPIRATION as string
     )
     await store.set(
       `verification:${user.email}`,

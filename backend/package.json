@@ -20,7 +20,8 @@
     "express": "^4.17.1",
     "handy-redis": "^2.3.1",
     "jsonwebtoken": "^8.5.1",
-    "redis": "^3.1.2"
+    "redis": "^3.1.2",
+    "socket.io": "^4.4.0"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",

@@ -1,7 +1,9 @@
 import database from '@database/client'
 import bcrypt from 'bcrypt'
 
-import VerificationToken from "./AuthDomain/VerificationToken"
+import MailService from 'Utils/MailService'
+import AccessToken from './AuthDomain/AccessToken'
+import VerificationToken from './AuthDomain/VerificationToken'
 
 export default {
   async createUser(data: { name: string; email: string; password: string }) {
@@ -13,22 +15,13 @@ export default {
     data.password = hashedPassword
     const user = await database.user.create({ data })
     const verificationToken = await VerificationToken.generate(user)
-    await this.sendEmailVerification(user.email, verificationToken)
+    await MailService.sendEmailVerification(user.email, verificationToken)
     const userWithoutPassword = {
       ...user,
       verificationToken,
       password: undefined
     }
     return userWithoutPassword
-  },
-
-  async sendEmailVerification(email: string, verificationToken: string) {
-    //This function simulates the sending of an email to the user
-    //It should be replaced by a real email service
-    console.log(
-      `Fake user verification sent to ${email}: 
-      Link to verify user: http://localhost:3333/user/verify/${verificationToken}`
-    )
   },
 
   async doesUserExist(email: string) {
@@ -97,5 +90,16 @@ export default {
     } else {
       throw new Error('Token is required')
     }
+  },
+
+  async getIdFromToken(token: string) {
+    try {
+      const user = await AccessToken.getUser(token)
+      if (user == null) throw new Error('Invalid token')
+      return user.id
+    } catch (error) {
+      throw new Error('Invalid token')
+    }
+    
   }
 }
