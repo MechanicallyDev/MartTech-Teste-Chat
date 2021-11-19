@@ -10,7 +10,7 @@ Está também incluso um frontend em ReactJS apenas para validação do Websocke
 
 ## Rodar localmente
 
-Antes de iniciar o projeto é necessário que tenha o [NodeJS](https://nodejs.org) instalado na máquina.
+Antes de iniciar o projeto é necessário que tenha o [NodeJS](https://nodejs.org) e o [Redis](https://redis.io) instalado na máquina, assim como um banco de dados se sua preferência (por padrão utilizado sqlite3, não sendo necessário instalação).
 
 Clone o projeto
 
