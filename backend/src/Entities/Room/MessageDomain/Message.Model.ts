@@ -25,9 +25,10 @@ export default {
 
   async sendMessage(room: string, message: string, token: string) {
     try {
+      if (!room || !message || !token) return null
       const roomId = await RoomModel.getRoomBySlug(room)
       const user = await UserModel.getIdFromToken(token)
-      if (!roomId || !user || !message) return null
+      if (!roomId || !user) return null
 
       const newMessage = await database.message.create({
         data: {

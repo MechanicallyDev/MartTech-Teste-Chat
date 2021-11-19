@@ -18,7 +18,7 @@ const host = process.env.APP_HOST || 'localhost'
 const port = Number(process.env.APP_PORT) || 3333
 
 app.listen(port, host, () => {
-  console.log(`Server started on http://${host}:${port}`)
+  console.log(`API Server started on http://${host}:${port}`)
 });
 
 const WS_Port = Number(process.env.WS_PORT) || 3344

@@ -3,7 +3,7 @@ import controller from './User.Controller'
 
 const routes = express.Router()
 
-routes.get('/get/:id', controller.getUser)
+routes.get('/info/:id', controller.getUser)
 routes.post('/register', controller.register)
 routes.post('/login', controller.login)
 routes.get('/verify/:token', controller.verify)

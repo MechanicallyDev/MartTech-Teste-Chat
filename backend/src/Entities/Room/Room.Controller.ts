@@ -10,6 +10,7 @@ export default {
       return response.status(500).json(error)
     }
   },
+
   async createRoom(request: Request, response: Response) {
     const {name, token} = request.body
     try {
@@ -22,6 +23,7 @@ export default {
       return response.status(500).json(error)
     }
   },
+  
   async renameRoom(request: Request, response: Response) {
     const {slug} = request.params
     const {name, token} = request.body

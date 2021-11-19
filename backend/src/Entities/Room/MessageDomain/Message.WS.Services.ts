@@ -20,7 +20,7 @@ ws.on('connect', socket => {
 
   socket.on('messageListener', async message => {
     const user = await model.getUser(socket.id)
-    if (user)
+    if (user && message.length > 0)
       ws.to(user.room).emit('message', {
         name: user.name,
         text: message,

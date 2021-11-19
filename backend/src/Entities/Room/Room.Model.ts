@@ -46,7 +46,6 @@ export default {
     } catch (error) {
       console.log(error)
     }
-    
   },
 
   async roomAlreadyExists(slug: string) {
