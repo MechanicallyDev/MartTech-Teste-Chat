@@ -1,4 +1,4 @@
-
+![chat-image](https://raw.githubusercontent.com/MechanicallyDev/MartTech-Teste-Chat/main/chatImagem.png?token=AEYNE6PIURC62J66LWFXCR3BTAP7M)
 # Chat MartTech
 
 Este projeto foi criado como teste para uma vaga em Node.JS para a empresa MartTech.
