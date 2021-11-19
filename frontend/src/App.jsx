@@ -134,7 +134,7 @@ function App() {
         </div>
 
         <Button.Group size='xlarge' vertical color='gradient' bordered>
-          {listRooms.map(room => (
+          {listRooms && listRooms.map(room => (
             <Button key={room.id} onClick={() => handleRoomChange(room.slug)}>
               <Text h6>{room.name}</Text>
             </Button>
@@ -144,7 +144,7 @@ function App() {
       <ChatContainer>
         {room && listMessages && (
           <Chat ref={chatElement}>
-            {listMessages.map(message => (
+            {listMessages && listMessages.map(message => (
               <Message key={message.id}>
                 <Info>
                   <Author>
