@@ -8,14 +8,14 @@ export default {
 
     const messages = await database.message.findMany({
       where: {
-        roomId:  roomId?.id 
+        roomId: roomId?.id
       },
       include: {
         user: {
           select: {
             id: true,
             name: true,
-            email: true,
+            email: true
           }
         }
       }
@@ -24,30 +24,26 @@ export default {
   },
 
   async sendMessage(room: string, message: string, token: string) {
-    try {
-      if (!room || !message || !token) return null
-      const roomId = await RoomModel.getRoomBySlug(room)
-      const user = await UserModel.getIdFromToken(token)
-      if (!roomId || !user) return null
+    if (!room || !message || !token) return null
+    const roomId = await RoomModel.getRoomBySlug(room)
+    const user = await UserModel.getIdFromToken(token)
+    if (!roomId || !user) return null
 
-      const newMessage = await database.message.create({
-        data: {
-          text: message,
-          room: {
-            connect: {
-              id: roomId.id
-            }
-          },
-          user: {
-            connect: {
-              id: user
-            }
+    const newMessage = await database.message.create({
+      data: {
+        text: message,
+        room: {
+          connect: {
+            id: roomId.id
+          }
+        },
+        user: {
+          connect: {
+            id: user
           }
         }
-      })
-      return newMessage
-    } catch (error) {
-      console.log(error)
-    }
+      }
+    })
+    return newMessage
   }
 }

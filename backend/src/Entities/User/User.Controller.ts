@@ -28,7 +28,8 @@ export default {
       const user = await model.tryLogin(email, password)
       const accessToken = await AccessToken.generate(user)
       const refreshToken = await RefreshToken.generate(user)
-      return response.status(202).json({ accessToken, refreshToken })
+      const sanitizedUser = {id: user.id, name: user.name, email: user.email}
+      return response.status(202).json({ ...sanitizedUser, accessToken, refreshToken  })
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Invalid email or password')

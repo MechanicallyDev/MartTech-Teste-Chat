@@ -93,13 +93,8 @@ export default {
   },
 
   async getIdFromToken(token: string) {
-    try {
       const user = await AccessToken.getUser(token)
       if (user == null) throw new Error('Invalid token')
-      return user.id
-    } catch (error) {
-      throw new Error('Invalid token')
-    }
-    
+      return user.id    
   }
 }
