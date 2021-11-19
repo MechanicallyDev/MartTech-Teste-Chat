@@ -1,4 +1,5 @@
 ![chat-image](https://raw.githubusercontent.com/MechanicallyDev/MartTech-Teste-Chat/main/chatImagem.png?token=AEYNE6PIURC62J66LWFXCR3BTAP7M)
+
 # Chat MartTech
 
 Este projeto foi criado como teste para uma vaga em Node.JS para a empresa MartTech.
@@ -6,7 +7,6 @@ Este projeto foi criado como teste para uma vaga em Node.JS para a empresa MartT
 É composto por uma API em Node.JS, que utiliza Websockets para trânsito de dados em janelas de chat.
 
 Está também incluso um frontend em ReactJS apenas para validação do Websocket.
-
 
 ## Rodar localmente
 
@@ -38,12 +38,17 @@ Instale as dependências de backend
 
 Crie um arquivo `.env` para armazenar as variáveis de ambiente, ou renomeie o arquivo `.env.example` para `.env`, e [configure as variáveis](#variáveis-de-ambiente) conforme o seu ambiente.
 
+Faça as migrações de banco de dados para que o banco de dados seja criado.
+
+```bash
+  npx prisma migrate reset
+```
+
 Inicialize o serviço
 
 ```bash
   npm run dev
 ```
-
 
 ## Variáveis de ambiente
 
@@ -61,34 +66,42 @@ Antes de rodar este projeto você precisará adicionar as seguintes variáveis d
 * `ACCESS_TOKEN_EXPIRATION= '1m'` Tempo (em string) para o Access Token expirar
 
 * `REFRESH_TOKEN_SECRET= 654321` Chave utilizada para encriptar o Refresh Token
-* `REFRESH_TOKEN_EXPIRATION= 604800 ` Tempo (em segundos) para o Refresh Token expirar
+* `REFRESH_TOKEN_EXPIRATION= 604800` Tempo (em segundos) para o Refresh Token expirar
 
 * `VERIFICATION_TOKEN_SECRET= 987654` Chave utilizada para encriptar o Verification Token
-* `VERIFICATION_TOKEN_EXPIRATION= 86400 ` Tempo (em segundos) para o Verification Token expirar
+* `VERIFICATION_TOKEN_EXPIRATION= 86400` Tempo (em segundos) para o Verification Token expirar
+
 ## Referência de API
 
 ##### [Usuários](#usuários)
+
 * [Obter um usuário específico](#obter-um-usuário-específico)
 * [Criar usuário](#criar-usuário)
 * [Efetuar login](#efetuar-login)
 * [Renovar tokens](#renovar-tokens)
 * [Deslogar](#deslogar)
+
 ##### [Salas](#salas)
+
 * [Listar salas](#listar-salas)
 * [Criar nova sala](#criar-uma-nova-sala)
 * [Renomear sala](#renomear-sala)
+
 ##### [Mensagens](#mensagens)
+
 * [Obter mensagens em uma sala](#obter-mensagens-de-uma-sala)
 * [Enviar um nova mensagem](#criar-uma-nova-mensagem)
 
 ### Usuários
+
 #### Obter um usuário específico
 
 ```http
   GET /user/info/:id
 ```
 
-##### Retorno:
+##### Retorno
+
 | Parâmetro     | Tipo     | Descrição                        |
 | :--------     | :------- | :--------------------------------|
 | `id`          | `number` | Identificador do usuário         |
@@ -96,7 +109,6 @@ Antes de rodar este projeto você precisará adicionar as seguintes variáveis d
 | `name`        | `string` | Nome do usuário                  |
 | `createdAt`   | `string` | Data de criação da conta         |
 | `updatedAt`   | `string` | Data da modificação mais recente |
-
 
 #### Criar usuário
 
@@ -106,8 +118,8 @@ Antes de rodar este projeto você precisará adicionar as seguintes variáveis d
 
 | Parâmetro | Tipo     | Descrição                         |
 | :-------- | :------- | :-------------------------        |
-| `name   ` | `string` | **Obrigatório**. Nome do usuário  |
-| `email  ` | `string` | **Obrigatório**. Email do usuário |
+| `name` | `string` | **Obrigatório**. Nome do usuário  |
+| `email` | `string` | **Obrigatório**. Email do usuário |
 | `password`| `string` | **Obrigatório**. Senha            |
 
 **Importante:** Ao criar o usuário, será lançado no console um link para verificação, simulando um serviço de verificação por e-mail.
@@ -122,10 +134,11 @@ Apenas após verificar através do link o usuário poderá fazer login e utiliza
 
 | Parâmetro | Tipo     | Descrição                         |
 | :-------- | :------- | :-------------------------------- |
-| `email  ` | `string` | **Obrigatório**. Email do usuário |
+| `email` | `string` | **Obrigatório**. Email do usuário |
 | `password`| `string` | **Obrigatório**. Senha            |
 
-##### Retorno:
+##### Retorno
+
 | Parâmetro     | Tipo     | Descrição                                          |
 | :--------     | :------- | :--------------------------------                  |
 | `accessToken` | `string` | Chave de acesso com curta duração                  |
@@ -139,10 +152,10 @@ Apenas após verificar através do link o usuário poderá fazer login e utiliza
 
 | Parâmetro | Tipo     | Descrição                         |
 | :-------- | :------- | :-------------------------------- |
-| `token  ` | `string` | **Obrigatório**. Refresh Token    |
+| `token` | `string` | **Obrigatório**. Refresh Token    |
 
+##### Retorno
 
-##### Retorno:
 | Parâmetro     | Tipo     | Descrição                                                  |
 | :--------     | :------- | :--------------------------------                          |
 | `accessToken` | `string` | Chave de acesso com curta duração                          |
@@ -156,20 +169,20 @@ Apenas após verificar através do link o usuário poderá fazer login e utiliza
 
 | Parâmetro | Tipo     | Descrição                         |
 | :-------- | :------- | :-------------------------------- |
-| `token  ` | `string` | **Obrigatório**. Refresh Token    |
+| `token` | `string` | **Obrigatório**. Refresh Token    |
 
 Após o logout os tokens de acesso são revogados e para obter novos tokens é necessário efetuar o login novamente.
 
-
-
 ### Salas
+
 #### Listar salas
 
 ```http
   GET /chat/list
 ```
 
-##### Retorno:
+##### Retorno
+
 A rota retorna um array de salas, cada item do array contendo:
 
 | Parâmetro     | Tipo     | Descrição                          |
@@ -181,7 +194,6 @@ A rota retorna um array de salas, cada item do array contendo:
 | `updatedAt`   | `string` | Data da modificação mais recente   |
 | `ownerId`     | `number` | Identificador de quem criou a sala |
 
-
 #### Criar uma nova sala
 
 ```http
@@ -190,24 +202,26 @@ A rota retorna um array de salas, cada item do array contendo:
 
 | Parâmetro | Tipo     | Descrição                                |
 | :-------- | :------- | :-------------------------               |
-| `name   ` | `string` | **Obrigatório**. Nome da sala            |
-| `token  ` | `string` | **Obrigatório**. Access Token do usuário |
+| `name` | `string` | **Obrigatório**. Nome da sala            |
+| `token` | `string` | **Obrigatório**. Access Token do usuário |
 
 #### Renomear Sala
 
 ```http
   PUT /chat/rename/:slug
 ```
+
 **Nota:** Apenas o criador da sala pode renomea-la.
 
 | Parâmetro | Tipo     | Descrição                                |
 | :-------- | :------- | :--------------------------------        |
-| `email  ` | `string` | **Obrigatório**. Email do usuário        |
-| `token  ` | `string` | **Obrigatório**. Access Token do usuário |
-
+| `email` | `string` | **Obrigatório**. Email do usuário        |
+| `token` | `string` | **Obrigatório**. Access Token do usuário |
 
 ### Mensagens
+
 #### Obter mensagens de uma sala
+
 ```http
   GET /chat/messages/:slug
 ```
@@ -216,7 +230,8 @@ A rota retorna um array de salas, cada item do array contendo:
 | :-------- | :------- | :--------------------------------        |
 | `slug`    | `string` | **Obrigatório**. Slug da sala            |
 
-##### Retorno:
+##### Retorno
+
 A rota retorna um array de mensagens, cada item do array contendo:
 
 | Parâmetro     | Tipo     | Descrição                          |
@@ -246,4 +261,4 @@ O objeto `user` contém:
 | :-------- | :------- | :-------------------------               |
 | `room`    | `string` | **Obrigatório**. Nome da sala para a qual vai enviar a mensagem |
 | `text`    | `string` | **Obrigatório**. Texto da mensagem       |
-| `token  ` | `string` | **Obrigatório**. Access Token do usuário |
+| `token` | `string` | **Obrigatório**. Access Token do usuário |
