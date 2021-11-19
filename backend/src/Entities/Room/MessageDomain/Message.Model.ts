@@ -9,9 +9,17 @@ export default {
     const messages = await database.message.findMany({
       where: {
         roomId:  roomId?.id 
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          }
+        }
       }
     })
-    console.log(messages)
     return messages
   },
 

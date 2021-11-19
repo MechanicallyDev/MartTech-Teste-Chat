@@ -10,9 +10,6 @@ export default {
       return response.status(500).json(error)
     }
   },
-  async accessRoom(request: Request, response: Response) {
-    return response.status(200).json({ placeHolder: 'Access a specific room' })
-  },
   async createRoom(request: Request, response: Response) {
     const {name, token} = request.body
     try {

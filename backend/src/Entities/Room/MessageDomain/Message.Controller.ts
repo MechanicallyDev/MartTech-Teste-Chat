@@ -4,7 +4,7 @@ import model from './Message.Model'
 export default {
   async readMessages(request: Request, response: Response) {
     try {
-      const { room } = request.body
+      const { room } = request.params
       const messages = await model.getMessages(room)
       return response.json(messages)
     } catch (error) {
