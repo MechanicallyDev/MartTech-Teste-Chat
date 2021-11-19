@@ -67,8 +67,8 @@ Antes de rodar este projeto você precisará adicionar as seguintes variáveis d
 * `VERIFICATION_TOKEN_EXPIRATION= 86400 ` Tempo (em segundos) para o Verification Token expirar
 ## Referência de API
 
-##### [Usuários](#usuarios)
-* [Obter um usuário específico](#obter-um-usuario-específico)
+##### [Usuários](#usuários)
+* [Obter um usuário específico](#obter-um-usuário-específico)
 * [Criar usuário](#criar-usuário)
 * [Efetuar login](#efetuar-login)
 * [Renovar tokens](#renovar-tokens)
